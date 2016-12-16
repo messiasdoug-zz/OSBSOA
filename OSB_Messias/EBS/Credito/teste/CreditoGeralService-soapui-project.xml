@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="a9d79c57-62df-4150-9838-46dd19d71002" activeEnvironment="Default" name="CreditoGeralService" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="a15ab19b-61fb-4d4d-a77f-58164d865f33" wsaVersion="NONE" name="CreditoGeralServiceSOAP" type="wsdl" bindingName="{http://cursosoa.org/CreditoGeralService/}CreditoGeralServiceSOAP" soapVersion="1_1" anonymous="optional" definition="file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Contracts/CreditoGeralService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Contracts/CreditoGeralService.wsdl"><con:part><con:url>file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Contracts/CreditoGeralService.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CreditoGeralService" targetNamespace="http://cursosoa.org/CreditoGeralService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://cursosoa.org/CreditoGeralService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ser="http://creditogeral.com.br/SN/CreditoGeral">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://creditogeral.com.br/CreditoGeral">
+      <xsd:import namespace="http://creditogeral.com.br/SN/CreditoGeral" schemaLocation="../Schemas/CreditoGeral.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CreditoGeralRequest">
+    <wsdl:part element="ser:ParametrosCreditoGeral" name="ParametrosCreditoGeral"/>
+  </wsdl:message>
+  <wsdl:message name="CreditoGeralResponse">
+    <wsdl:part element="ser:ResultadoCreditoGeral" name="ResultadoCreditoGeral"/>
+  </wsdl:message>
+  <wsdl:portType name="CreditoGeralService">
+    <wsdl:operation name="ConsultarCreditoGeral">
+      <wsdl:input message="tns:CreditoGeralRequest"/>
+      <wsdl:output message="tns:CreditoGeralResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreditoGeralServiceSOAP" type="tns:CreditoGeralService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultarCreditoGeral">
+      <soap:operation soapAction="http://www.example.org/CreditoGeralService/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreditoGeralService">
+    <wsdl:port binding="tns:CreditoGeralServiceSOAP" name="CreditoGeralServiceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Schemas/CreditoGeral.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://creditogeral.com.br/SN/CreditoGeral" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://creditogeral.com.br/SN/CreditoGeral" xmlns:pref="http://creditlegacy.com.br/SN/CreditLegacy" xmlns:lpref1="http://whitelist.com.br/SN/WhiteList" xmlns:pref1="http://serasa.com.br/SN/Serasa">
+  <xs:import schemaLocation="CreditLegacy.xsd" namespace="http://creditlegacy.com.br/SN/CreditLegacy"/>
+  <xs:import schemaLocation="InternalWhiteList.xsd" namespace="http://whitelist.com.br/SN/WhiteList"/>
+  <xs:import schemaLocation="Serasa.xsd" namespace="http://serasa.com.br/SN/Serasa"/>
+  <xs:element name="ParametrosCreditoGeral" type="tns:ParametrosCreditoGeral"/>
+  <xs:element name="ResultadoCreditoGeral" type="tns:ResultadoCreditoGeral"/>
+  <xs:complexType name="ParametrosCreditoGeral">
+    <xs:sequence>
+      <xs:element name="ParametrosCreditLegacy" type="pref:ParametrosCreditLegacy"/>
+      <xs:element name="ParametrosWhiteList" type="lpref1:ParametrosWhiteList"/>
+      <xs:element name="ParametrosSerasa" type="pref1:ParametrosSerasa"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResultadoCreditoGeral">
+    <xs:sequence>
+      <xs:element name="score" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Schemas/CreditLegacy.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://creditlegacy.com.br/SN/CreditLegacy" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://creditlegacy.com.br/SN/CreditLegacy">
+  <element name="ParametrosCreditLegacy" type="tns:ParametrosCreditLegacy"/>
+  <element name="ResultadoCreditLegacy" type="tns:ResultadoCreditLegacy"/>
+  <complexType name="ParametrosCreditLegacy">
+    <sequence>
+      <element name="cpf" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="motivos" type="tns:ListaMotivo" minOccurs="1" maxOccurs="1"/>
+      <element name="dt_solicitacao" type="date" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ResultadoCreditLegacy">
+    <sequence>
+      <element name="cpf" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="restricoes" type="tns:ListaRestricoes" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ListaMotivo">
+    <sequence>
+      <element name="ds_motivo" type="string" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="ListaRestricoes">
+    <sequence>
+      <element name="restricao" type="tns:restricao" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="restricao">
+    <sequence>
+      <element name="ds_restricao" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="valor" type="string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Schemas/InternalWhiteList.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://whitelist.com.br/SN/WhiteList" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://whitelist.com.br/SN/WhiteList">
+  <element name="ParametrosWhiteList" type="tns:ParametrosWhiteList"/>
+  <element name="ResultadoWhiteList" type="tns:ResultadoWhiteList"/>
+  <complexType name="ParametrosWhiteList">
+    <sequence>
+      <element name="num_documento" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="dt_nascimento" type="date" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ResultadoWhiteList">
+    <sequence>
+      <element name="num_documento" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="indica_white_list" type="boolean" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/puc/workspace/OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Schemas/Serasa.xsd</con:url><con:content><![CDATA[<schema targetNamespace="http://serasa.com.br/SN/Serasa" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://serasa.com.br/SN/Serasa">
+  <element name="ParametrosSerasa" type="tns:ParametrosSerasa"/>
+  <element name="ResultadoSerasa" type="tns:ResultadoSerasa"/>
+  <complexType name="ParametrosSerasa">
+    <sequence>
+      <element name="num_documento" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="dt_nascimento" type="date" minOccurs="1" maxOccurs="1"/>
+      <element name="dt_solicitacao" type="date" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+  <complexType name="ResultadoSerasa">
+    <sequence>
+      <element name="num_documento" type="string" minOccurs="1" maxOccurs="1"/>
+      <element name="valor_restricao" type="decimal" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://puc-VirtualBox:8090/mockCreditoGeralServiceSOAP</con:endpoint><con:endpoint>http://www.example.org/</con:endpoint></con:endpoints><con:operation id="4ed7ecaa-fccc-4075-a774-7d5b67b41f29" isOneWay="false" action="http://www.example.org/CreditoGeralService/NewOperation" name="ConsultarCreditoGeral" bindingOperationName="ConsultarCreditoGeral" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bb7ac55d-a047-4b2a-ad44-c81f81fce948" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.example.org/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://creditogeral.com.br/SN/CreditoGeral" xmlns:cred1="http://creditlegacy.com.br/SN/CreditLegacy" xmlns:whit="http://whitelist.com.br/SN/WhiteList" xmlns:ser="http://serasa.com.br/SN/Serasa">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cred:ParametrosCreditoGeral>
+         <cred:ParametrosCreditLegacy>
+            <cred1:cpf>?</cred1:cpf>
+            <cred1:motivos>
+               <!--1 or more repetitions:-->
+               <cred1:ds_motivo>01</cred1:ds_motivo>
+            </cred1:motivos>
+            <cred1:dt_solicitacao>2016-12-15</cred1:dt_solicitacao>
+         </cred:ParametrosCreditLegacy>
+         <cred:ParametrosWhiteList>
+            <whit:num_documento>999.999.999-99</whit:num_documento>
+            <whit:dt_nascimento>1993-05-07</whit:dt_nascimento>
+         </cred:ParametrosWhiteList>
+         <cred:ParametrosSerasa>
+            <ser:num_documento>999.999.999-99</ser:num_documento>
+            <ser:dt_nascimento>1993-05-07</ser:dt_nascimento>
+            <ser:dt_solicitacao>2016-12-15</ser:dt_solicitacao>
+         </cred:ParametrosSerasa>
+      </cred:ParametrosCreditoGeral>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.example.org/CreditoGeralService/NewOperation"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService id="ead194d2-d804-40f1-b347-8cd9f082fdc2" port="8090" path="/mockCreditoGeralServiceSOAP" host="puc-VirtualBox" name="CreditoGeralServiceSOAP MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="ConsultarCreditoGeral" id="6f01ed97-7f55-4388-9ca3-3d6a998a3f93" interface="CreditoGeralServiceSOAP" operation="ConsultarCreditoGeral"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="84fb1545-5bd1-4c2e-ad9c-c7193d5e56a3" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cred="http://creditogeral.com.br/SN/CreditoGeral">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cred:ResultadoCreditoGeral>
+         <cred:score></cred:score>
+      </cred:ResultadoCreditoGeral>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.example.org/CreditoGeralService/NewOperation"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

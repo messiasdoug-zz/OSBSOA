@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:schemaEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:schema><![CDATA[<schema targetNamespace="http://pucminas.br/MC/SOA/Messias" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://pucminas.br/MC/SOA/Messias" xmlns:pes="http://pucminas.br/MC/SOA/Messias">
+
+	<include schemaLocation="Pessoa.xsd"/>
+
+	<complexType name="Credito">
+		<sequence>
+			<element name="pessoa" type="pes:Pessoa"/>
+			<element name="indicaCreditoExterno" type="boolean"/>
+			<element name="indicaCreditoInterno" type="boolean"/>
+			<element name="indicaWhiteList" type="boolean"/>
+			<element name="situacao" type="integer"/>
+		</sequence>	
+	</complexType>
+	
+
+</schema>]]></con:schema>
+    <con:dependencies>
+        <con:include schemaLocation="Pessoa.xsd" ref="OSB_Messias/ModeloCanonico/MC/Pessoa"/>
+    </con:dependencies>
+    <con:targetNamespace>http://pucminas.br/MC/SOA/Messias</con:targetNamespace>
+</con:schemaEntry>

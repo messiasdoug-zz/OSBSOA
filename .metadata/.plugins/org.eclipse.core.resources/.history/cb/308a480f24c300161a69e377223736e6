@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://creditogeral.com.br/SN/CreditoGeral"
+	xmlns:tns="http://creditogeral.com.br/SN/CreditoGeral"
+	elementFormDefault="qualified" xmlns:pref="http://creditlegacy.com.br/SN/CreditLegacy">
+
+	<element name="ParametrosCreditoGeral" type="tns:ParametrosCreditoGeral" />
+	<element name="ResultadoCreditoGeral" type="tns:ResultadoCreditoGeral" />
+
+	<import schemaLocation="CreditLegacy.xsd" namespace="http://creditlegacy.com.br/SN/CreditLegacy"/>
+	<import />
+	<import />
+	
+	<complexType name="ParametrosCreditoGeral">
+		<sequence>
+			<element name="ParametrosCreditLegacy" type="pref:parametrosVerificaCreditoInterno" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ResultadoCreditoGeral">
+		<sequence>
+			<element name="score" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+</schema>

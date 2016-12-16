@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://creditogeral.com.br/SN/CreditoGeral" xmlns:tns="http://creditogeral.com.br/SN/CreditoGeral"
+	elementFormDefault="qualified" xmlns:pref="http://creditlegacy.com.br/SN/CreditLegacy"
+	xmlns:lpref1="http://whitelist.com.br/SN/WhiteList" xmlns:pref1="http://serasa.com.br/SN/Serasa">
+
+	<xs:import schemaLocation="CreditLegacy.xsd"
+		namespace="http://creditlegacy.com.br/SN/CreditLegacy" />
+	<xs:import schemaLocation="InternalWhiteList.xsd"
+		namespace="http://whitelist.com.br/SN/WhiteList" />
+	<xs:import schemaLocation="Serasa.xsd" namespace="http://serasa.com.br/SN/Serasa" />
+
+	<xs:element name="ParametrosCreditoGeral" type="tns:ParametrosCreditoGeral" />
+	<xs:element name="ResultadoCreditoGeral" type="tns:ResultadoCreditoGeral" />
+
+	<xs:complexType name="ParametrosCreditoGeral">
+		<xs:sequence>
+			<xs:element name="ParametrosCreditLegacy" type="pref:ParametrosCreditLegacy" />
+			<xs:element name="ParametrosWhiteList" type="lpref1:ParametrosWhiteList" />
+			<xs:element name="ParametrosSerasa" type="pref1:ParametrosSerasa" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResultadoCreditoGeral">
+		<xs:sequence>
+			<xs:element name="score" type="string" minOccurs="1"
+				maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process name="CreditoGeralSplitJoin"
+              targetNamespace="http://www.example.com/flow/OSB_Messias/ServicosNegocio/Credito/CreditoGeralSplitJoin"
+              xmlns:tns="http://www.example.com/flow/OSB_Messias/ServicosNegocio/Credito/CreditoGeralSplitJoin"
+              xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+              xmlns:rescon="http://www.bea.com/alsb/flow/resources/config"
+              xmlns:bea="http://www.bea.com/bpel/ui/extensions"
+              xmlns:ext="http://www.bea.com/bpel/extensions"
+              xmlns:expr="http://www.bea.com/wli/sb/stages/config"
+              xmlns:trf="http://www.bea.com/wli/sb/stages/transform/config"
+              xmlns:bind="http://www.example.org/CreditoGeralService/" 
+              bea:name="CreditoGeralSplitJoin" xmlns:ns0="http://cursosoa.org/CreditoGeralService/" xmlns:ns1="http://cursosoa.org/SerasaService/" xmlns:ns2="http://cursosoa.org/CreditLegacyService/" xmlns:ns3="http://cursosoa.org/InternalWhiteListService/">
+    <bpel:partnerLinks>
+        <bpel:partnerLink name="CreditoGeralSplitJoin" partnerLinkType="tns:CreditoGeralSplitJoin"
+                          myRole="CreditoGeralSplitJoin">
+	       </bpel:partnerLink>
+	   <bpel:partnerLink name="SerasaProxyService"
+		partnerLinkType="tns:SerasaProxyService_plnkType"
+		partnerRole="SerasaProxyService_PartnerRole">
+	   </bpel:partnerLink>
+	   <bpel:partnerLink name="CreditLegacyProxyService"
+	   	partnerLinkType="tns:CreditLegacyProxyService_plnkType"
+	   	partnerRole="CreditLegacyProxyService_PartnerRole">
+	   </bpel:partnerLink>
+	   <bpel:partnerLink name="InternalWhiteListProxyService"
+	   	partnerLinkType="tns:InternalWhiteListProxyService_plnkType"
+	   	partnerRole="InternalWhiteListProxyService_PartnerRole">
+	   </bpel:partnerLink></bpel:partnerLinks>
+
+	   <bpel:variables>
+        <bpel:variable name="request" messageType="ns0:CreditoGeralRequest">
+	       </bpel:variable>
+	       <bpel:variable name="response" messageType="ns0:CreditoGeralResponse">
+	       </bpel:variable>
+    <bpel:variable name="CreditoGeralRequest" messageType="ns0:CreditoGeralResponse">
+    </bpel:variable>
+    <bpel:variable name="CreditoGeralResponse"
+    	messageType="ns0:CreditoGeralResponse">
+    </bpel:variable></bpel:variables>
+
+    <bpel:sequence>
+        <bpel:receive partnerLink="CreditoGeralSplitJoin" operation="ConsultarCreditoGeral" createInstance="yes" variable="request">
+	           <rescon:receiveInfo>
+                <rescon:wsdl ref="OSB_Messias/ServicosNegocio/Credito/Resources/Interfaces/Contracts/CreditoGeralService" binding="ns0:CreditoGeralServiceSOAP"/>
+            </rescon:receiveInfo>
+        </bpel:receive>
+        <bpel:flow>
+        	<bpel:scope bea:name="SerasaScope">
+        		<bpel:variables>
+        			<bpel:variable name="Serasaequest"
+        				messageType="ns1:Serasaequest">
+        			</bpel:variable>
+        			<bpel:variable name="SerasaResponse"
+        				messageType="ns1:SerasaResponse">
+        			</bpel:variable></bpel:variables>
+        		<bpel:sequence>
+        			<bpel:assign>
+        				<bpel:extensionAssignOperation>
+        					<trf:assign varName="Serasaequest.ParametrosSerasa">
+        						<trf:expr>
+        							<expr:xqueryText>$request.ParametrosCreditoGeral</expr:xqueryText></trf:expr></trf:assign>
+        				</bpel:extensionAssignOperation>
+        			</bpel:assign>
+        			<bpel:invoke operation="ConsultarSerasa" partnerLink="SerasaProxyService" inputVariable="Serasaequest" outputVariable="SerasaResponse">
+        				<rescon:invokeInfo>
+        					<rescon:service isProxy="true" ref="OSB_Messias/ServicosNegocio/Credito/Services/Proxies/SerasaProxyService"></rescon:service></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+        	</bpel:scope>
+        	<bpel:scope bea:name="CreditLegacyScope">
+        		<bpel:variables>
+        			<bpel:variable name="CreditLegacyequest"
+        				messageType="ns2:CreditLegacyequest">
+        			</bpel:variable>
+        			<bpel:variable name="CreditLegacyResponse"
+        				messageType="ns2:CreditLegacyResponse">
+        			</bpel:variable></bpel:variables>
+        		<bpel:sequence>
+        			
+        		<bpel:assign>
+		<bpel:extensionAssignOperation>
+			<trf:assign varName="CreditLegacyequest.ParametrosCreditLegacy">
+				<trf:expr>
+					<expr:xqueryText>$request.ParametrosCreditoGeral</expr:xqueryText></trf:expr></trf:assign>
+		</bpel:extensionAssignOperation>
+        		</bpel:assign>
+	<bpel:invoke operation="ConsultarCreditLegacy" partnerLink="CreditLegacyProxyService" inputVariable="CreditLegacyequest" outputVariable="CreditLegacyResponse">
+        			<rescon:invokeInfo>
+        				<rescon:service isProxy="true" ref="OSB_Messias/ServicosNegocio/Credito/Services/Proxies/CreditLegacyProxyService"></rescon:service></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+        	</bpel:scope>
+        	<bpel:scope bea:name="InternalWhiteListScope">
+        		<bpel:variables>
+        			<bpel:variable name="InternalWhiteListResponse"
+        				messageType="ns3:InternalWhiteListResponse">
+        			</bpel:variable>
+        			<bpel:variable name="InternalWhiteListequest"
+        				messageType="ns3:InternalWhiteListequest">
+        			</bpel:variable></bpel:variables>
+        		<bpel:sequence>
+        			<bpel:assign>
+        				<bpel:extensionAssignOperation>
+        					<trf:assign varName="InternalWhiteListequest.ParametrosInternalWhiteList">
+        						<trf:expr>
+        							<expr:xqueryText>$request.ParametrosCreditoGeral</expr:xqueryText></trf:expr></trf:assign>
+        				</bpel:extensionAssignOperation>
+        			</bpel:assign>
+        			<bpel:invoke operation="ConsultarInternalWhiteList" partnerLink="InternalWhiteListProxyService" outputVariable="InternalWhiteListResponse" inputVariable="InternalWhiteListequest">
+        				<rescon:invokeInfo>
+        					<rescon:service isProxy="true" ref="OSB_Messias/ServicosNegocio/Credito/Services/Proxies/InternalWhiteListProxyService"></rescon:service></rescon:invokeInfo></bpel:invoke></bpel:sequence>
+        	</bpel:scope>
+        </bpel:flow>
+        <bpel:assign>
+        	<bpel:extensionAssignOperation>
+        		<trf:assign varName="response.ResultadoCreditoGeral"></trf:assign>
+        	</bpel:extensionAssignOperation>
+        </bpel:assign>
+        <bpel:reply partnerLink="CreditoGeralSplitJoin" operation="ConsultarCreditoGeral" variable="CreditoGeralResponse"></bpel:reply>
+    </bpel:sequence>
+</bpel:process>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:schemaEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:schema><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		targetNamespace="http://pucminas.br/MC/SOA/Messias" 
+		xmlns:tns="http://pucminas.br/MC/SOA/Messias" elementFormDefault="qualified">
+	
+	<complexType name="PucminasFault">
+		<sequence>
+			<element name="codigo" type="integer"/>
+			<element name="descricao" type="string"/>
+			<element name="detalhe" type="string"/>
+		</sequence>	
+	</complexType>	
+	
+	<element name="pucminasFault" type="tns:PucminasFault" />
+	
+</schema>]]></con:schema>
+    <con:targetNamespace>http://pucminas.br/MC/SOA/Messias</con:targetNamespace>
+</con:schemaEntry>

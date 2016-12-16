@@ -1,0 +1,6 @@
+1481590715516	Delete resource 'OSB_Messias/ServicosNegocio/Pessoa/Resources'
+1481590720939	Delete resource 'OSB_Messias/ServicosNegocio/Pessoa/Services/Proxies/Operations'
+1481842853918	Delete resource 'OSB_Messias/ServicosNegocio/Credito/Services/Proxies/CreditoGeralProxyService.proxy'
+1481848490706	Delete resource 'OSB_Messias/ServicosNegocio/Credito/Services/Business/CreditoGeralBusinessService.biz'
+1481849751718	Delete resource 'OSB_Messias/ServicosNegocio/Credito/Resources/SplitJoin/SplitJoinCreditoGeralBusinessService.biz'
+1481849979580	Delete resource 'OSB_Messias/ServicosNegocio/Credito/Services/Proxies/CreditoGeralProxyService.proxy'
